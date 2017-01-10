@@ -3,69 +3,65 @@ package com.demo.sorting;
 public class MergeSort {
 
 	int numbers[];
+	int helper[];
+	int count;
 
 	public int[] getNumbers() {
 		return numbers;
 	}
 
-
 	public void setNumbers(int[] numbers) {
 		this.numbers = numbers;
 	}
 
-
-	private  MergeSort(int numbers[]) {
+	private MergeSort(int numbers[]) {
 		this.numbers = numbers;
+		count = numbers.length;
+		helper = new int[count];
 	}
-	
-	
-	public int [] sort() {
-		int[] tempArray=new int[numbers.length];
-		mergeSort(numbers,0,numbers.length-1);
+
+	public int[] sort() {
+		mergeSort(0, numbers.length - 1);
 		return this.numbers;
 	}
 
-
-	private void mergeSort(int[] numbers, int lowerIndex, int higherIndex) {
-		if(lowerIndex==higherIndex) {
+	private void mergeSort(int lowerIndex, int higherIndex) {
+		if (lowerIndex == higherIndex) {
 			return;
-		}else {
-			int mid=(lowerIndex+higherIndex)/2;
-			mergeSort(numbers, lowerIndex, mid);
-			mergeSort(numbers, mid+1, higherIndex);
-			merge(numbers,lowerIndex,mid,higherIndex);
-		
+		} else {
+			int mid = (lowerIndex + higherIndex) / 2;
+			mergeSort(lowerIndex, mid);
+			mergeSort(mid + 1, higherIndex);
+			merge(lowerIndex, mid, higherIndex);
 		}
-			
+
 	}
 
+	private void merge(int lowerIndex, int mid, int higherIndex) {
+		int i=lowerIndex;
+		int j=mid+1;
+		int k=lowerIndex;
+		for (int n = lowerIndex; n <= higherIndex; n++) {
+            helper[n] = numbers[n];
+		}
 
-	private void merge(int[] numbers, int lowerIndex, int mid, int higherIndex) {
-		Utility.print(numbers,"In Recurtion with Start ["+lowerIndex+"] Mid ["+mid+"] End ["+higherIndex+"]");
-		int[] temp=new int[this.numbers.length];
-		int count=higherIndex-lowerIndex+1;
-		int secondLower=mid+1;
-		int start=lowerIndex;
-		int i=0;
-		while(lowerIndex<=mid&&secondLower<=higherIndex) {
-			if(this.numbers[lowerIndex]<this.numbers[secondLower]) {
-				temp[i++]=this.numbers[lowerIndex++];
-			}else {
-				temp[i++]=this.numbers[secondLower++];
-			}
+		while(i<=mid&&j<=higherIndex) {
+			if(helper[i]<helper[j])
+				numbers[k++]=helper[i++];
+			else
+				numbers[k++]=helper[j++];
 		}
-		while(lowerIndex<=mid) {
-			temp[i++]=this.numbers[lowerIndex++];
+		
+		while(i<=mid) {
+			numbers[k++]=helper[i++];
 		}
-		while(secondLower<=higherIndex) {
-			temp[i++]=this.numbers[secondLower++];
+		while(j<=higherIndex) {
+			numbers[k++]=helper[j++];
 		}
-		for (int j = 0; j < temp.length; j++) {
-			this.numbers[j]=temp[j];
-		}
+	
 	}
 	public static void main(String[] args) {
-		MergeSort mergersort=new MergeSort(Utility.getRandomIntegers(10));
+		MergeSort mergersort = new MergeSort(Utility.getRandomIntegers(10));
 		Utility.print(mergersort.getNumbers(), "Before MErge Sort");
 		Utility.print(mergersort.sort(), "After Merge Sort");
 	}
