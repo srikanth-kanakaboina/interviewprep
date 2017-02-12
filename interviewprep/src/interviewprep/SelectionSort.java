@@ -1,13 +1,12 @@
 package interviewprep;
 
 
-
 /**
  * Created by jananiravi on 11/13/15.
  */
 public class SelectionSort {
 
-    private static int listToSort[] = new int[] {4, 5, 6, 2, 1, 7, 10, 3, 8, 9};
+    private static int listToSort[] = new int[]{4, 5, 6, 2, 1, 7, 10, 3, 8, 9};
 
     public static void main(String[] args) {
         print(listToSort);

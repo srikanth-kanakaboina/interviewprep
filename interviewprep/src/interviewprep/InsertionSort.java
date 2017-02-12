@@ -3,7 +3,7 @@ package interviewprep;
 
 public class InsertionSort {
 
-    private static int listToSort[] = new int[] {3, 5, 6, 8, 10, 1, 2, 4, 7, 9};
+    private static int listToSort[] = new int[]{3, 5, 6, 8, 10, 1, 2, 4, 7, 9};
 
     public static void main(String[] args) {
         print(listToSort);
