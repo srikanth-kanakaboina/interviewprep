@@ -22,9 +22,8 @@ public class Utility {
 	
 	public static void print(int[] numbers,String message){
 		System.out.print(message+	"	:[ ");
-		for (int i : numbers) { 
-			System.out.print("|	"+i+" 	|");
-		}
+		IntStream.range(0, numbers.length)
+				.forEach(i->System.out.print("|	"+i+" 	|"));
 		System.out.print(" ]\n");
 		
 	}
