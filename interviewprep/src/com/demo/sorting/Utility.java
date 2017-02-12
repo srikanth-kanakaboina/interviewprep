@@ -1,14 +1,15 @@
 package com.demo.sorting;
 
-import java.util.Arrays;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 public class Utility {
 	public static int[] getRandomIntegers(int count) {
 		int[] randomIntegers = new int[count];
-		for (int i = 0; i < randomIntegers.length; i++) {
-			randomIntegers[i] = new Random().nextInt(100);
-		}
+		
+		IntStream.range(0, randomIntegers.length)
+         .forEach(i -> randomIntegers[i] = new Random().nextInt(100));
+		
 		return randomIntegers;
 	}
 
