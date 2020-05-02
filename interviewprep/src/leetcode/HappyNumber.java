@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class HappyNumber {
 
-    public static boolean isHappy(int n) {
+    public static boolean isHappy1(int n) {
 
         System.out.println("IsHappy number	:	" + n);
         if (n == 1) return true;
@@ -17,8 +17,8 @@ public class HappyNumber {
             sumtotal = 0;
             while (n > 0) {
                 int lastDigit = n % 10;
-                sumtotal += lastDigit * lastDigit;
                 n = n / 10;
+                sumtotal += lastDigit * lastDigit;
             }
 
             System.out.println("Sumtotal	:	" + sumtotal);
@@ -32,8 +32,41 @@ public class HappyNumber {
     }
 
     public static void main(String[] args) {
-        System.out.println("Is Hsppy number	:	" + HappyNumber.isHappy(new Random().nextInt()));
+        int randomNum=new Random().nextInt(1000);
+        System.out.println("Is Happy number	Method 1:	" + HappyNumber.isHappy1(randomNum));
+
+        System.out.println("Is Happy number	Method 2:	" + HappyNumber.isHappy2(randomNum));
 
     }
+
+    private static boolean isHappy2(int number) {
+        Set<Integer> sumOfSquare = new HashSet<>();
+
+        sumOfSquare.add(number);
+
+        while (number!=1){
+            number = getSumOfDigits(number);
+            if( sumOfSquare.contains(number)){
+                return false;
+            }
+            sumOfSquare.add(number);
+        }
+        return true;
+
+
+    }
+
+    private static int getSumOfDigits(int number) {
+        int sum=0;
+        while (number>0){
+            int digit=number%10;
+            number/=10;
+            sum+=digit*digit;
+        }
+        return sum;
+    }
+
+    ;
+
 
 }
